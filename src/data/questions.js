@@ -1,4 +1,4 @@
-// ─── NON-CALCULATOR PAPER (sec: "NC") ────────────────────────────────────────
+// ─── NON-CALCULATOR PAPER (sec: "A") ────────────────────────────────────────
 // New types used below:
 //   "order"   – drag/drop or fill 4 blanks in order
 //   "multi"   – tick all that apply (array answer)
@@ -10,7 +10,7 @@ export const questions = [
   // ── Non-calculator ──────────────────────────────────────────────────────────
 
   {
-    id: "NC1", sec: "NC", marks: 1, type: "number",
+    id: "A1", sec: "A", marks: 1, type: "number",
     text: "Work out 48 × 19 =",
     hint: "Break it down: 48 × 20 = 960, then subtract 48.",
     answer: 912, displayAnswer: "912",
@@ -18,9 +18,9 @@ export const questions = [
   },
 
   {
-    id: "NC2", sec: "NC", marks: 1, type: "order",
-    // type "order": render 4 input boxes; accept any correct ordering string
-    text: "Write these amounts in order starting with the largest amount.\n\n330 ml     1 litre     500 ml     250 ml",
+    id: "A2", sec: "A", marks: 1, type: "order",
+    // type "order": render 4 input boxes; accept any correct ordering string \n\n12\u00a0\u00a0\u00a0\u00a024\u00a0\u00a0\u00a0\u00a036\n
+    text: "Write these amounts in order starting with the largest amount.\n\n330 ml\u00a0\u00a0\u00a0\u00a01 litre\u00a0\u00a0\u00a0\u00a0500 ml\u00a0\u00a0\u00a0\u00a0250 ml",
     hint: "Convert 1 litre to ml first.",
     answer: ["1 litre", "500 ml", "330 ml", "250 ml"],
     displayAnswer: "1 litre, 500 ml, 330 ml, 250 ml",
@@ -28,8 +28,8 @@ export const questions = [
   },
 
   {
-    id: "NC3", sec: "NC", marks: 1, type: "choice",
-    image: "NC3 – Weighing scales A B C D", imgSrc: "images/Q3.png",
+    id: "A3", sec: "A", marks: 1, type: "choice",
+    image: "A3 – Weighing scales A B C D", imgSrc: "images/Q3.png",
     text: "Which one of the following is the best to measure out 300 g of flour?\n\nTick one.",
     hint: "You need scales that measure in grams accurately.",
     options: ["A", "B", "C", "D"],
@@ -38,7 +38,7 @@ export const questions = [
   },
 
   {
-    id: "NC4", sec: "NC", marks: 1, type: "twonumber",
+    id: "A4", sec: "A", marks: 1, type: "twonumber",
     text: "896 ÷ 5 =",
     hint: "How many times does 5 go into 896? What is left over?",
     labels: ["answer", "remainder"],
@@ -47,15 +47,15 @@ export const questions = [
   },
 
   {
-    id: "NC5", sec: "NC", marks: 1, type: "number",
-    text: "What is the next number in this sequence?\n\n3.4     5.1     6.8     ___",
+    id: "A5", sec: "A", marks: 1, type: "number",
+    text: "What is the next number in this sequence?\n\n3.4\u00a0\u00a0\u00a0\u00a05.1\u00a0\u00a0\u00a0\u00a0 6.8\u00a0\u00a0\u00a0\u00a0     ___",
     hint: "What is added each time?",
     answer: 8.5, displayAnswer: "8.5",
     explanation: "+1.7 each time: 3.4 → 5.1 → 6.8 → 8.5",
   },
 
   {
-    id: "NC6", sec: "NC", marks: 1, type: "number",
+    id: "A6", sec: "A", marks: 1, type: "number",
     text: "What is £567.27 rounded to the nearest pound?",
     hint: "Look at the pence: 27p is less than 50p, so round down.",
     answer: 567, displayAnswer: "£567",
@@ -63,8 +63,8 @@ export const questions = [
   },
 
   {
-    id: "NC7", sec: "NC", marks: 1, type: "text",
-    image: "NC7 – Circle divided into 5 equal segments, 1 shaded", imgSrc: "images/Q7.png",
+    id: "A7", sec: "A", marks: 1, type: "text",
+    image: "A7 – Circle divided into 5 equal segments, 1 shaded", imgSrc: "images/Q7.png",
     text: "What fraction of this shape is shaded?",
     hint: "Count the total sections and the shaded sections.",
     answer: "1/5", displayAnswer: "1/5",
@@ -73,8 +73,10 @@ export const questions = [
   },
 
   {
-    id: "NC8", sec: "NC", marks: 1, type: "choice",
-    text: "A woman sees three job advertisements.\n\nShe wants to apply for the job nearest to where she lives.\n\nJob A is 152 km, Job B is 154 km and Job C is 148 km from her home.\n\nWhich job will she apply for?",
+    id: "A8", sec: "A", marks: 1, type: "choice",
+    pretext:"A woman sees three job advertisements.\n\nShe wants to apply for the job nearest to where she lives.",
+    customContent: "jobs",
+    text: "Which job will she apply for?",
     hint: "Find the smallest distance.",
     options: ["Job A", "Job B", "Job C"],
     answer: "Job C", displayAnswer: "Job C",
@@ -82,21 +84,21 @@ export const questions = [
   },
 
   {
-    id: "NC9", sec: "NC", marks: 1, type: "multi",
+    id: "A9", sec: "A", marks: 1, type: "twotext",
     // type "multi": two free-text boxes (or a multi-select from month names)
-    image: "NC9 – Bar chart: factory workers Jan–Jun", imgSrc: "images/Q9.png",
+    image: "A9 – Bar chart: factory workers Jan–Jun", imgSrc: "images/Q9.png",
     text: "The bar chart shows the number of workers employed in a factory from January to June.\n\nIn which two months did the factory employ the same number of workers?",
     hint: "Look for two bars that reach the same height.",
-    answer: ["February", "May"],   // ← adjust if your chart image differs
-    displayAnswer: "February and May",
-    explanation: "The bars for February and May are the same height on the chart.",
+    answer: ["January", "April"],
+    displayAnswer: "January and April",
+    explanation: "January and April both show approximately 430 workers — the same bar height.",
   },
 
   {
-    id: "NC10", sec: "NC", marks: 1, type: "table",
+    id: "A10", sec: "A", marks: 1, type: "table",
     // type "table": render partial table; user fills in the two missing cells
-    image: "NC10 – Tally / raw data", imgSrc: "images/Q10.png",
-    preText: "At a workplace induction people were asked how they travelled to work that morning.\n\nThese are the results:\n\nbus cycle car walk cycle\nwalk walk train bus car\ncar train car cycle cycle\nbus walk bus car walk\ncycle bus train walk bus",
+    image: "A10 – Tally / raw data", imgSrc: "images/Q10.png",
+    preText: "At a workplace induction people were asked how they travelled to work that morning.\n\nThese are the results:",
     text: "Complete the frequency table.\n\nbus = 6, car = 5, cycle = 5 (given). Fill in walk and train.",
     hint: "Count the tally marks for walk and train in the raw data.",
     tableData: {
@@ -114,11 +116,9 @@ export const questions = [
     explanation: "Counting from the raw data: walk appears 6 times, train appears 3 times. Total = 6+5+5+6+3 = 25 ✓",
   },
 
-
-  // ── Calculator paper (sec: "C") ─────────────────────────────────────────────
-
+  // ── Calculator paper (sec: "B") ─────────────────────────────────────────────
   {
-    id: "C1", sec: "C", marks: 1, type: "number",
+    id: "B1", sec: "B", marks: 1, type: "number",
     text: "242 + 361 + 295 =",
     hint: "Add the hundreds, tens and units separately if needed.",
     answer: 898, displayAnswer: "898",
@@ -126,19 +126,19 @@ export const questions = [
   },
 
   {
-    id: "C2", sec: "C", marks: 1, type: "multi",
-    image: "C2 – Letters A C E G", imgSrc: "images/B-Q2.png",
-    text: "Tick all the letters that have a line of symmetry.\n\nA     C     E     G",
+    id: "B2", sec: "B", marks: 1, type: "multi",
+    image: "B2 – Letters A C E G", imgSrc: "images/B-Q2.png",
+    text: "Tick all the letters that have a line of symmetry.",
     hint: "Fold each letter in half — does one side mirror the other?",
     options: ["A", "C", "E", "G"],
-    answer: ["A", "E"],   // A = vertical symmetry; E = horizontal symmetry; C & G do not
-    displayAnswer: "A and E",
-    explanation: "A has a vertical line of symmetry; E has a horizontal line of symmetry. C and G do not.",
+    answer: ["A", "C","E"],   // A C = vertical symmetry; E = horizontal symmetry;  G do not
+    displayAnswer: "A, C and E",
+    explanation: "A and C have a vertical line of symmetry; E has a horizontal line of symmetry.",
   },
 
   {
-    id: "C3", sec: "C", marks: 1, type: "number",
-    text: "What is the next number in this sequence?\n\n39     52     65     78     ___",
+    id: "B3", sec: "B", marks: 1, type: "number",
+    text: "What is the next number in this sequence?\n\n39\u00a0\u00a0\u00a0\u00a0     52 \u00a0\u00a0\u00a0\u00a0      65 \u00a0\u00a0\u00a0\u00a0      78 \u00a0\u00a0\u00a0\u00a0      ___",
     hint: "What is added each time?",
     answer: 91, displayAnswer: "91",
     explanation: "+13 each time: 78 + 13 = 91",
@@ -146,9 +146,10 @@ export const questions = [
 
   // Q4 is split into four sub-questions
   {
-    id: "C4a", sec: "C", marks: 2, type: "number",
-    image: "C4 – Job advert & wage table", imgSrc: "images/B-Q4.png",
-    preText: "A man sees a job advert:\n\nShop assistant required for busy superstore.\n6am – 2pm Monday to Friday.\nApplicants must be 16 years and over.",
+    id: "B4a", sec: "B", marks: 2, type: "number",
+   
+    preText: "A man sees a job advert in a newspaper.\n\nHe decides to apply for the job.\n\nHe wants to work out how many hours each week he will have to work.",
+    customContent:"jobAdvert",
     text: "What number of hours will he need to work each week?",
     hint: "How many hours is 6am to 2pm? Multiply by the number of days.",
     answer: 40, displayAnswer: "40 hours",
@@ -157,8 +158,9 @@ export const questions = [
   },
 
   {
-    id: "C4b", sec: "C", marks: 3, type: "number",
-    preText: "The man is 17 years old.\n\nNational Minimum Wage table:\nApprentice £5.28 | Under 18 £5.28 | 18–20 £7.49 | 21–24 £10.18 | 25+ £8.21",
+    id: "B4b", sec: "B", marks: 3, type: "number",
+    preText: " The man uses this table to find out how much he should be paid each week before any deductions are made.\n\nThe man is 17 years old.",
+    image: "B4 – Job advert & wage table", imgSrc: "images/B-Q4.png",
     text: "What will the man be paid each week? Give units with your answer.",
     hint: "Find the correct wage band for age 17, then multiply by hours.",
     answer: 211.20, displayAnswer: "£211.20",
@@ -167,7 +169,7 @@ export const questions = [
   },
 
   {
-    id: "C4c", sec: "C", marks: 1, type: "text",
+    id: "B4c", sec: "B", marks: 1, type: "text",
     text: "Give a reason for the National Minimum Wage you used.",
     hint: "State the man's age and the relevant band.",
     answer: "under18",
@@ -177,8 +179,8 @@ export const questions = [
   },
 
   {
-    id: "C4d", sec: "C", marks: 2, type: "number",
-    text: "The man wants to work out approximately how much the pay would be for one month (use 4 weeks).\n\nWhat would the approximate pay be?\n\nShow your working.",
+    id: "B4d", sec: "B", marks: 2, type: "number",
+    text: "The man wants to work out approximately how much the pay would be for one month.\nHe uses four weeks for one month.\n\nWhat would the approximate pay be?\n\nShow your working.",
     hint: "Round the weekly pay first, then multiply by 4.",
     answer: 844.80,   // exact; accept rounded values
     check: v => {
@@ -191,10 +193,11 @@ export const questions = [
   },
 
   {
-    id: "C5", sec: "C", marks: 3, type: "calendar",
+    id: "B5", sec: "B", marks: 3, type: "calendar",
     // type "calendar": display an August calendar; user marks two dates with notes
-    image: "C5 – August calendar", imgSrc: "images/B-Q5.png",
-    preText: "The closing date for the job application is 12th August.\nInterviews will be held on the 14th August between 10am and 3pm.",
+    image: "B5 – August calendar", imgSrc: "images/B-Q5.png",
+    preText: "The man applies for the job. He checks the advert for the closing date for the job application and when the interviews will be held.\n\nHe makes note of this information.",
+    customContent:"deadline",
     text: "Write on the calendar the information he needs to note.",
     hint: "Mark both the closing date (12 Aug) and the interview date/times (14 Aug, 10am–3pm).",
     answer: {
@@ -206,10 +209,10 @@ export const questions = [
   },
 
   {
-    id: "C6a", sec: "C", marks: 3, type: "shopping",
+    id: "B6a", sec: "B", marks: 3, type: "number",
     // type "shopping": display image grid of items; user picks one from each category
-    image: "C6 – Clothes grid A–I", imgSrc: "images/B-Q6.png",
-    preText: "Budget: £60. Must buy one pair of trousers (A/B/C), one shirt (D/E/F), one jacket (G/H/I).\n\nA £15.40  B £17.45  C £31.50\nD £24.95  E £11.69  F £14.95\nG £19.99  H £39.99  I £24.99",
+    image: "B6 – Clothes grid A–I", imgSrc: "images/B-Q6.png",
+    preText: "The man gets an interview for the job.\n He wants to look smart for his interview.\n\nHe has £60 to spend on clothes.\n He needs to buy a pair of trousers,a shirt and a jacket.\n\nHe looks online and chooses from these items. ",
     text: "Make a list of the items he needs to buy.\n\nWhat will he pay for the items he chose?",
     hint: "Choose one from each group. The total must be £60 or less.",
     // Any valid combination ≤ £60 is accepted. Cheapest = A+E+G = £47.08
@@ -225,8 +228,8 @@ export const questions = [
   },
 
   {
-    id: "C6b", sec: "C", marks: 1, type: "number",
-    text: "What will he have left to spend on a haircut?\n\nShow your working.",
+    id: "B6b", sec: "B", marks: 1, type: "number",
+    text: "He wants to spend the money he has left on a haircut. \n\nWhat will he have left to spend on a haircut?\n\nShow your working.",
     hint: "Subtract your total from £60.",
     answer: null,  // depends on C6a; validate as 60 minus their total
     check: (leftover, total) => Math.abs(leftover + total - 60) < 0.01,
@@ -235,7 +238,7 @@ export const questions = [
   },
 
   {
-    id: "C6c", sec: "C", marks: 1, type: "text",
+    id: "B6c", sec: "B", marks: 1, type: "text",
     text: "Use approximation to check your answer.\n\nWrite your check here.",
     hint: "Round each item price to the nearest pound, add them, subtract from £60.",
     answer: null,  // free text — any reasonable approximation
@@ -244,8 +247,8 @@ export const questions = [
   },
 
   {
-    id: "C7a", sec: "C", marks: 1, type: "choice",
-    image: "C7 – Map with compass N arrow; home is east, supermarket is west", imgSrc: "images/B-Q7.png",
+    id: "B7a", sec: "B", marks: 1, type: "choice",
+    image: "B7 – Map with compass N arrow; home is east, supermarket is west", imgSrc: "images/B-Q7.png",
     text: "In which direction is the supermarket from the man's home?",
     hint: "N is shown on the map. The supermarket is to the left of home.",
     options: ["North", "South", "East", "West"],
@@ -254,8 +257,8 @@ export const questions = [
   },
 
   {
-    id: "C7b", sec: "C", marks: 1, type: "choice",
-    text: "The website shows four routes. He wants the shortest.\n\nRoute A: 1.5 miles   Route B: 1.3 miles   Route C: 1.7 miles   Route D: 1.6 miles\n\nTick the route the man will take.",
+    id: "B7b", sec: "B", marks: 1, type: "choice",
+    text: "The website shows four routes. He wants the shortest.\n\nRoute A: 1.5 miles \nRoute B: 1.3 miles   \nRoute B: 1.7 miles  \nRoute D: 1.6 miles\n\nTick the route the man will take.",
     hint: "Find the smallest distance.",
     options: ["Route A", "Route B", "Route C", "Route D"],
     answer: "Route B", displayAnswer: "Route B",
@@ -263,8 +266,8 @@ export const questions = [
   },
 
   {
-    id: "C8", sec: "C", marks: 2, type: "yesno",
-    image: "C8 – Phone showing 13:50", imgSrc: "images/B-Q8.png",
+    id: "B8", sec: "B", marks: 2, type: "yesno",
+    image: "B8 – Phone showing 13:50", imgSrc: "images/B-Q8.png",
     text: "The man's interview is at 2:15 pm.\n\nWhen he arrives at the supermarket, his phone shows 13:50.\n\nIs he on time for his interview?\n\nGive a reason for your answer. Use the times to help you explain.",
     hint: "Convert 2:15 pm to 24-hour time, then compare.",
     answer: "Yes", displayAnswer: "Yes",
@@ -272,7 +275,7 @@ export const questions = [
   },
 
   {
-    id: "C9a", sec: "C", marks: 3, type: "table",
+    id: "B9a", sec: "B", marks: 3, type: "table",
     // type "table": render 7-row table Mon–Sun; user ticks correct rows
     preText: "Stockroom temperature must be between 10°C and 15°C.\n\nTemperatures recorded:\nMonday 12.5°C | Tuesday 13.6°C | Wednesday 14.8°C | Thursday 15.3°C | Friday 14.4°C | Saturday 10.5°C | Sunday 9°C",
     text: "Complete the table starting with Monday. Tick each day to show if the temperature was between 10°C and 15°C.",
@@ -295,7 +298,7 @@ export const questions = [
   },
 
   {
-    id: "C9b", sec: "C", marks: 2, type: "yesno",
+    id: "B9b", sec: "B", marks: 2, type: "yesno",
     image: "C9b – Thermometer showing ~15°C", imgSrc: "images/B-Q9.png",
     text: "The temperature in the supermarket should be about 18°C.\n\nThis thermometer shows the temperature in the supermarket today.\n\nIs the temperature about right?\n\nGive a reason for your answer.",
     hint: "Read the thermometer value and compare it to 18°C.",
@@ -304,7 +307,7 @@ export const questions = [
   },
 
   {
-    id: "C10a", sec: "C", marks: 1, type: "multi",
+    id: "B10a", sec: "B", marks: 1, type: "multi",
     image: "C10 – Boxes A(18kg) B(20kg) C(13kg) D(900g)", imgSrc: "images/B-Q10.png",
     preText: "Maximum weight for lifting boxes for women is up to 16 kg.\nMaximum weight for lifting boxes for men is up to 25 kg.",
     text: "Which of these boxes is a woman allowed to lift? Tick the boxes.\n\nA: 18 kg   B: 20 kg   C: 13 kg   D: 900 g",
@@ -316,7 +319,7 @@ export const questions = [
   },
 
   {
-    id: "C10b", sec: "C", marks: 1, type: "multi",
+    id: "B10b", sec: "B", marks: 1, type: "multi",
     image: "C10b – Boxes A(22kg) B(32kg) C(23kg) D(790g)", imgSrc: "images/B-Q10b.png",
     text: "Which of these boxes is a man allowed to lift? Tick the boxes.\n\nA: 22 kg   B: 32 kg   C: 23 kg   D: 790 g",
     hint: "Men can lift up to 25 kg.",

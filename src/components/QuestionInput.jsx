@@ -76,5 +76,176 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
     return <ParcelTable sel={a.selected} onSel={v => upd({ selected: v })} />;
   }
 
+  if (q.type === "multi") {
+    const selected = a.selected ?? [];
+    const toggle = opt => {
+      const next = selected.includes(opt)
+        ? selected.filter(v => v !== opt)
+        : [...selected, opt];
+      upd({ selected: next });
+    };
+    return (
+      <div style={{ display: "flex", flexDirection: "row",flexWrap:"wrap", gap: 30, marginBottom: 18 }}>
+        {q.options.map(opt => {
+          const checked = selected.includes(opt);
+          return (
+            <button
+              key={opt}
+              onClick={() => toggle(opt)}
+              style={{
+                display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center",
+                padding: "13px 22px", borderRadius: 10, cursor: "pointer", textAlign: "left",
+                border: `2px solid ${checked ? C.pri : C.bdr}`,
+                background: checked ? C.priLight : "#fff",
+                color: C.txt, fontSize: 17, fontWeight: checked ? 600 : 400,
+                transition: "border-color 0.15s, background 0.15s",
+              }}
+            >
+              <span>{opt}</span>
+              {/* Tick indicator on the right */}
+              <span style={{
+                width: 22, height: 22, borderRadius: 4, flexShrink: 0,
+                border: `2px solid ${checked ? C.pri : C.bdr}`,
+                background: checked ? C.pri : "#fff",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "background 0.15s, border-color 0.15s",
+              }}>
+                {checked && (
+                  <svg width="8" height="10" viewBox="0 0 12 10" fill="none">
+                    <path d="M1 5l3.5 3.5L11 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // ── table ─────────────────────────────────────────────────────────────────
+  if (q.type === "table") {
+    const inputs = a.inputs ?? {};
+    const setCell = (key, val) => upd({ inputs: { ...inputs, [key]: val } });
+    const { headers, rows } = q.tableData;
+
+    return (
+      <div style={{ marginBottom: 18, overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 16 }}>
+          <thead>
+            <tr>
+              {headers.map(h => (
+                <th key={h} style={{
+                  padding: "9px 14px", background: C.pri, color: "#fff",
+                  fontWeight: 700, textAlign: "left", border: `1px solid ${C.bdr}`,
+                }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, ri) => (
+              <tr key={ri} style={{ background: ri % 2 === 0 ? "#fff" : "#f8fafc" }}>
+                {/* Label cell */}
+                <td style={{ padding: "8px 14px", border: `1px solid ${C.bdr}`, fontWeight: 600, color: C.txt }}>
+                  {row.label}
+                </td>
+
+                {/* Value cell — tables may or may not have a value column */}
+                {row.value !== undefined && (
+                  <td style={{ padding: "8px 14px", border: `1px solid ${C.bdr}`, color: C.txt }}>
+                    {row.value}
+                  </td>
+                )}
+
+                {/* Answer cell — given rows show the value; blank rows show an input */}
+                <td style={{ padding: "6px 10px", border: `1px solid ${C.bdr}` }}>
+                  {row.given ? (
+                    <span style={{ color: C.neu, fontWeight: 600 }}>{row.value ?? "—"}</span>
+                  ) : (
+                    <input
+                      type="text"
+                      value={inputs[row.label] ?? ""}
+                      onChange={e => setCell(row.label, e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter" && canSubmit) {
+                          const blanks = rows.filter(r => !r.given);
+                          const lastBlank = blanks[blanks.length - 1];
+                          if (row.label === lastBlank?.label) onSubmit();
+                        }
+                      }}
+                      placeholder="?"
+                      style={{
+                        width: "100%", padding: "7px 10px", fontSize: 16,
+                        border: `2px solid ${C.bdr}`, borderRadius: 6,
+                        outline: "none", boxSizing: "border-box",
+                      }}
+                    />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+  if (q.type === "twotext") {
+    const labels = q.labels ?? ["First answer", "Second answer"];
+    return (
+      <div style={{ marginBottom: 18 }}>
+        {[
+          { label: labels[0], key: "input", val: a.input ?? "" },
+          { label: labels[1], key: "input2", val: a.input2 ?? "" },
+        ].map(({ label, key, val }, i) => (
+          <div key={key} style={{ marginBottom: 10 }}>
+            <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: C.neu, marginBottom: 4 }}>
+              {label}
+            </label>
+            <input
+              type="text"
+              value={val}
+              onChange={e => upd({ [key]: e.target.value })}
+              onKeyDown={e => e.key === "Enter" && i === 1 && canSubmit && onSubmit()}
+              placeholder="Enter your answer…"
+              style={{
+                width: "100%", padding: "11px 14px", fontSize: 18,
+                border: `2px solid ${C.bdr}`, borderRadius: 8,
+                outline: "none", boxSizing: "border-box",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (q.type === "order") {
+    const inputs = a.inputs ?? Array(q.answer.length).fill("");
+    const setAt = (i, val) => {
+      const next = [...inputs];
+      next[i] = val;
+      upd({ inputs: next });
+    };
+    return (
+      <div style={{ marginBottom: 18 }}>
+        {inputs.map((val, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+            <span style={{ minWidth: 24, fontWeight: 700, color: C.neu, fontSize: 15 }}>{i + 1}.</span>
+            <input
+              type="text"
+              value={val}
+              onChange={e => setAt(i, e.target.value)}
+              onKeyDown={e => e.key === "Enter" && i === inputs.length - 1 && canSubmit && onSubmit()}
+              placeholder={`…`}
+              style={{ flex: 1, padding: "10px 14px", border: `2px solid ${C.bdr}`, borderRadius: 8, fontSize: 17, outline: "none", boxSizing: "border-box" }}
+            />
+          </div>
+        ))}
+      </div>
+    );
+
+  }
   return null;
 }

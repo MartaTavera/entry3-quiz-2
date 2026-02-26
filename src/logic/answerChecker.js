@@ -39,6 +39,54 @@ export function checkAnswer(q, a) {
       userDisplay = `${a.input} documents, ${a.input2} sheets`;
       break;
     }
+
+    case "order": {
+      // a.inputs: string[] — one entry per blank, in the order the user provided
+      const norm = v => v.trim().toLowerCase();
+      correct =
+        Array.isArray(a.inputs) &&
+        a.inputs.length === q.answer.length &&
+        a.inputs.every((v, i) => norm(v) === norm(q.answer[i]));
+      userDisplay = Array.isArray(a.inputs) ? a.inputs.join(", ") : "";
+      break;
+    }
+
+    case "multi": {
+      // a.selected: string[] — the options the user ticked
+      const norm = arr => [...arr].map(v => v.trim()).sort().join("|");
+      correct =
+        Array.isArray(a.selected) &&
+        norm(a.selected) === norm(q.answer);
+      userDisplay = Array.isArray(a.selected) ? a.selected.join(", ") : "";
+      break;
+    }
+    case "twotext": {
+      // Order-independent: the pair of inputs must match the pair of answers
+      const norm = v => v.trim().toLowerCase();
+      const given  = [norm(a.input ?? ""), norm(a.input2 ?? "")].sort();
+      const expect = [...q.answer].map(norm).sort();
+      correct = given[0] === expect[0] && given[1] === expect[1];
+      userDisplay = [a.input, a.input2].filter(Boolean).join(", ");
+      break;
+    }
+    case "table": {
+      // a.inputs: Record<string, string> — keyed by row label, value is what the user typed
+      // q.answer: Record<string, number|string> — same keys, expected values
+      if (!a.inputs || typeof a.inputs !== "object") break;
+      const entries = Object.entries(q.answer);
+      correct = entries.every(([key, expected]) => {
+        const raw = (a.inputs[key] ?? "").trim();
+        // Support numeric cells (loose equality after parsing) and string cells
+        return typeof expected === "number"
+          ? parseInt(raw) === expected
+          : raw.toLowerCase() === String(expected).toLowerCase();
+      });
+      userDisplay = Object.entries(a.inputs)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join(", ");
+      break;
+    }
+    
     default:
       break;
   }

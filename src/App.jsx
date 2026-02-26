@@ -3,8 +3,9 @@ import { C } from "./config/constants";
 import { questions } from "./data/questions";
 import { checkAnswer } from "./logic/answerChecker";
 import { ImgBox }        from "./components/ImgBox";
-import { HotelBoxes }    from "./components/HotelBoxes";
-import { TravelCosts }   from "./components/TravelCosts";
+import { JobDeadline }    from "./components/JobDeadline";
+import { JobAdvert }    from "./components/JobAdvert";
+import { JobDist }   from "./components/JobDist";
 import { ProgressBar }   from "./components/ProgressBar";
 import { HintBox }       from "./components/HintBox";
 import { FeedbackBox }   from "./components/FeedbackBox";
@@ -31,7 +32,12 @@ export default function Quiz() {
     q.type === "choice"    ? !!a.selected :
     q.type === "yesno"     ? !!a.yesNo :
     q.type === "parcel"    ? !!a.selected :
-    q.type === "twonumber" ? a.input !== "" && a.input2 !== "" : false;
+    q.type === "twonumber" ? a.input !== "" && a.input2 !== "" : 
+    q.type === "order"     ? (a.inputs ?? []).every(v => v.trim() !== "") :
+    q.type === "multi"     ? (a.selected ?? []).length > 0 :
+    q.type === "twotext"   ? (a.input ?? "").trim() !== "" && (a.input2 ?? "").trim() !== "" :
+    q.type === "table"     ? Object.keys(q.answer).every(k => (a.inputs?.[k] ?? "").trim() !== "") :
+    false;
 
   const handleSubmit = () => {
     const result = checkAnswer(q, a);
@@ -103,7 +109,7 @@ export default function Quiz() {
 
         <ProgressBar current={current} total={questions.length} color={sc} />
 
-        {current === 4 && (
+        {questions[current].id === "B1" && (
           <div style={{ background: "#ede9fe", border: "1px solid #c4b5fd", borderRadius: 8, padding: "9px 14px", fontSize: 14, color: C.b, marginBottom: 14, fontWeight: 600 }}>
             🧮 Section B starts here — calculator allowed!
           </div>
@@ -114,14 +120,16 @@ export default function Quiz() {
           <span style={{ background: q.sec === "A" ? "#e0f2fe" : "#ede9fe", color: sc, borderRadius: 99, padding: "3px 12px", fontSize: 13, fontWeight: 600 }}>{q.marks} mark{q.marks > 1 ? "s" : ""}</span>
           <span style={{ color: C.neu, fontSize: 13, lineHeight: "1.8" }}>Question {q.id}</span>
         </div>
-
-        {q.preText && <p style={{ fontSize: 18, fontWeight: 500, color: "#334155", marginBottom: 12, marginTop: 0 }}>{q.preText}</p>}
-        {q.customContent === "hotels" && <HotelBoxes />}
-        {q.customContent === "travel" && <TravelCosts />}
+        
+        {q.preText && <p style={{ fontSize: 20, fontWeight: 600, color: "#334155", lineHeight: 1.2, marginBottom: 12, marginTop: 0,whiteSpace: "pre-line" }}>{q.preText}</p>}
+        {q.customContent === "deadline" && <JobDeadline />}
+        {q.customContent === "jobs" && <JobDist />}
+        {q.customContent === "jobAdvert" && <JobAdvert />}
         {q.image && <ImgBox label={q.image} src={q.imgSrc || ""} />}
 
         <p style={{ fontSize: 20, fontWeight: 600, color: "#1e293b", lineHeight: 1.2, marginBottom: 18, marginTop: 0, whiteSpace: "pre-line" }}>{q.text}</p>
-
+       
+        
         {!a.submitted && <HintBox hint={q.hint} show={showHint} onToggle={() => setShowHint(h => !h)} />}
 
         {!a.submitted && (
