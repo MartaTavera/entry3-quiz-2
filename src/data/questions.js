@@ -5,7 +5,7 @@
 //   "twonumber" – already exists (quotient + remainder)
 //   "table"   – fill missing cells in a table
 
-export const jobSearchQuestions = [
+export const questions = [
 
   // ── Non-calculator ──────────────────────────────────────────────────────────
 
