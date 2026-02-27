@@ -69,6 +69,25 @@ export function checkAnswer(q, a) {
       userDisplay = [a.input, a.input2].filter(Boolean).join(", ");
       break;
     }
+    case "threetext": {
+      if (typeof q.check === "function") {
+        console.log("check inputs:", a.input, a.input2, a.input3);
+        correct = q.check(a.input, a.input2, a.input3);
+        break;
+      }
+      // Order-dependent: the answers inputs must match 
+      userDisplay = [a.input, a.input2, a.input3].filter(Boolean).join(", ");
+      if (typeof q.check === "function") {
+        correct = q.check(a.input, a.input2, a.input3);
+        break;
+      }
+      const norm = v => v.trim().toLowerCase();
+      const given  = [norm(a.input ?? ""), norm(a.input2 ?? ""), norm(a.input3?? "")].sort();
+      const expect = [...q.answer].map(norm);
+      correct = given[0] === expect[0] && given[1] === expect[1] && given[2] === expect[2];
+      userDisplay = [a.input, a.input2, a.input3].filter(Boolean).join(", ");
+      break;
+    }
     case "table": {
       // a.inputs: Record<string, string> — keyed by row label, value is what the user typed
       // q.answer: Record<string, number|string> — same keys, expected values

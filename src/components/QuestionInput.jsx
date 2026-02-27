@@ -29,14 +29,14 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 18 }}>
         {q.labels.map((label, i) => (
           <div key={i}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: C.neu, marginBottom: 5 }}>{label}</div>
+            <div style={{ fontSize: 19, fontWeight: 600, color: C.neu, marginBottom: 5 }}>{label}</div>
             <input
               type="number"
               value={i === 0 ? a.input : a.input2}
               onChange={e => upd(i === 0 ? { input: e.target.value } : { input2: e.target.value })}
               onKeyDown={e => e.key === "Enter" && canSubmit && onSubmit()}
-              placeholder={`Enter number of ${label}…`}
-              style={{ width: "100%", padding: "13px 16px", border: `2px solid ${C.bdr}`, borderRadius: 8, fontSize: 20, outline: "none", boxSizing: "border-box" }}
+              placeholder={`Enter  ${label}…`}
+              style={{ width: "100%", padding: "13px 16px", border: `2px solid ${C.bdr}`, borderRadius: 8, fontSize: 16, outline: "none", boxSizing: "border-box" }}
             />
           </div>
         ))}
@@ -47,7 +47,7 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
   if (q.type === "choice") {
     const sc = q.sec === "A" ? C.a : C.b;
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 18 }}>
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 100, marginBottom: 18 }}>
         {q.options.map(opt => (
           <button key={opt} onClick={() => upd({ selected: opt })}
             style={{ padding: "12px 16px", border: `2px solid ${a.selected === opt ? sc : C.bdr}`, borderRadius: 8, background: a.selected === opt ? (q.sec === "A" ? "#e0f2fe" : "#ede9fe") : "#fff", color: a.selected === opt ? sc : "#334155", fontSize: 16, cursor: "pointer", textAlign: "left", fontWeight: a.selected === opt ? 600 : 400, transition: "all 0.12s" }}>
@@ -128,7 +128,7 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
     const inputs = a.inputs ?? {};
     const setCell = (key, val) => upd({ inputs: { ...inputs, [key]: val } });
     const { headers, rows } = q.tableData;
-
+  
     return (
       <div style={{ marginBottom: 18, overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 16 }}>
@@ -147,34 +147,19 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
           <tbody>
             {rows.map((row, ri) => (
               <tr key={ri} style={{ background: ri % 2 === 0 ? "#fff" : "#f8fafc" }}>
-                {/* Label cell */}
+  
+                {/* Label cell — always static */}
                 <td style={{ padding: "8px 14px", border: `1px solid ${C.bdr}`, fontWeight: 600, color: C.txt }}>
                   {row.label}
                 </td>
-
-                {/* Value cell — tables may or may not have a value column */}
-                {row.value !== undefined && (
-                  <td style={{ padding: "8px 14px", border: `1px solid ${C.bdr}`, color: C.txt }}>
-                    {row.value}
-                  </td>
-                )}
-
-                {/* Answer cell — given rows show the value; blank rows show an input */}
+  
+                {/* Value cell — static text OR editable input */}
                 <td style={{ padding: "6px 10px", border: `1px solid ${C.bdr}` }}>
-                  {row.given ? (
-                    <span style={{ color: C.neu, fontWeight: 600 }}>{row.value ?? "—"}</span>
-                  ) : (
+                  {row.valueEditable ? (
                     <input
                       type="text"
-                      value={inputs[row.label] ?? ""}
-                      onChange={e => setCell(row.label, e.target.value)}
-                      onKeyDown={e => {
-                        if (e.key === "Enter" && canSubmit) {
-                          const blanks = rows.filter(r => !r.given);
-                          const lastBlank = blanks[blanks.length - 1];
-                          if (row.label === lastBlank?.label) onSubmit();
-                        }
-                      }}
+                      value={inputs[`${row.label}_temp`] ?? ""}
+                      onChange={e => setCell(`${row.label}_temp`, e.target.value)}
                       placeholder="?"
                       style={{
                         width: "100%", padding: "7px 10px", fontSize: 16,
@@ -182,8 +167,28 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
                         outline: "none", boxSizing: "border-box",
                       }}
                     />
+                  ) : (
+                    <span style={{ color: C.neu, fontWeight: 600 }}>{row.value ?? "—"}</span>
                   )}
                 </td>
+  
+                {/* Answer cell — yes/no input or blank rows input */}
+                {!row.given && (
+                  <td style={{ padding: "6px 10px", border: `1px solid ${C.bdr}` }}>
+                    <input
+                      type="text"
+                      value={inputs[row.valueEditable ? `${row.label}_yn` : row.label] ?? ""}
+                      onChange={e => setCell(row.valueEditable ? `${row.label}_yn` : row.label, e.target.value)}
+                      placeholder="?"
+                      style={{
+                        width: "100%", padding: "7px 10px", fontSize: 16,
+                        border: `2px solid ${C.bdr}`, borderRadius: 6,
+                        outline: "none", boxSizing: "border-box",
+                      }}
+                    />
+                  </td>
+                )}
+  
               </tr>
             ))}
           </tbody>
@@ -191,6 +196,7 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
       </div>
     );
   }
+  
   if (q.type === "twotext") {
     const labels = q.labels ?? ["First answer", "Second answer"];
     return (
@@ -200,7 +206,7 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
           { label: labels[1], key: "input2", val: a.input2 ?? "" },
         ].map(({ label, key, val }, i) => (
           <div key={key} style={{ marginBottom: 10 }}>
-            <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: C.neu, marginBottom: 4 }}>
+            <label style={{ display: "block", fontSize: 18, fontWeight: 600, color: C.neu, marginBottom: 4 }}>
               {label}
             </label>
             <input
@@ -220,7 +226,36 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
       </div>
     );
   }
-
+  if (q.type === "threetext") {
+    const labels = q.labels ?? ["First answer", "Second answer", "Third answer"];
+    return (
+      <div style={{ marginBottom: 18 }}>
+        {[
+          { label: labels[0], key: "input", val: a.input ?? "" },
+          { label: labels[1], key: "input2", val: a.input2 ?? "" },
+          { label: labels[2], key: "input3", val: a.input3 ?? "" },
+        ].map(({ label, key, val }, i) => (
+          <div key={key} style={{ marginBottom: 10 }}>
+            <label style={{ display: "block", fontSize: 20, fontWeight: 600, color:"black" , marginBottom: 4 }}>
+              {label}
+            </label>
+            <input
+              type="text"
+              value={val}
+              onChange={e => upd({ [key]: e.target.value })}
+              onKeyDown={e => e.key === "Enter" && i === 2 && canSubmit && onSubmit()}
+              placeholder="…"
+              style={{
+                width: "100%", padding: "11px 14px", fontSize: 18,
+                border: `2px solid ${C.bdr}`, borderRadius: 8,
+                outline: "none", boxSizing: "border-box",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
   if (q.type === "order") {
     const inputs = a.inputs ?? Array(q.answer.length).fill("");
     const setAt = (i, val) => {

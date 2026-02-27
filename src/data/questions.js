@@ -193,35 +193,45 @@ export const questions = [
   },
 
   {
-    id: "B5", sec: "B", marks: 3, type: "calendar",
+    id: "B5", sec: "B", marks: 3, type: "threetext",
     // type "calendar": display an August calendar; user marks two dates with notes
-    image: "B5 – August calendar", imgSrc: "images/B-Q5.png",
-    preText: "The man applies for the job. He checks the advert for the closing date for the job application and when the interviews will be held.\n\nHe makes note of this information.",
+    image: "B5 – August calendar", imgSrc: "images/B-Q52.png",
+    preText: "The man applies for the job.\n He checks the advert for the closing date for the job application and when the interviews will be held.\n\nHe wants to make a note of this information.",
     customContent:"deadline",
-    text: "Write on the calendar the information he needs to note.",
+    text: "Fill in the inforamtion for his notes.",
     hint: "Mark both the closing date (12 Aug) and the interview date/times (14 Aug, 10am–3pm).",
-    answer: {
-      "12": "Closing date for job application",
-      "14": "Interview 10am–3pm",
-    },
-    displayAnswer: "12 Aug: closing date noted; 14 Aug: interview 10am–3pm noted",
-    explanation: "Award marks for correctly identifying and labelling both dates with the relevant information.",
+    labels: ["What is the closing date for the application?", "What day of the week are interviews held?", "What time do interviews start"],
+    answer: ["12 August","Friday","10am"] ,
+    displayAnswer: "closing date noted: 12 Aug,  day of interview:Friday; interview 10 am noted",
+    explanation: "closing date: 12 Aug:  noted; day of interview Friday; interview 10 am noted",
   },
 
   {
-    id: "B6a", sec: "B", marks: 3, type: "number",
+    id: "B6a", sec: "B", marks: 3, type: "threetext",
     // type "shopping": display image grid of items; user picks one from each category
     image: "B6 – Clothes grid A–I", imgSrc: "images/B-Q6.png",
     preText: "The man gets an interview for the job.\n He wants to look smart for his interview.\n\nHe has £60 to spend on clothes.\n He needs to buy a pair of trousers,a shirt and a jacket.\n\nHe looks online and chooses from these items. ",
-    text: "Make a list of the items he needs to buy.\n\nWhat will he pay for the items he chose?",
+    text: "Write the price of the three items he decides to buy.",
+    labels: ["Item 1:", "Item 2:", "Item 3:",],
     hint: "Choose one from each group. The total must be £60 or less.",
     // Any valid combination ≤ £60 is accepted. Cheapest = A+E+G = £47.08
     answer: null,   // open — validate in check()
-    check: (trouser, shirt, jacket) => {
-      const prices = { A:15.40,B:17.45,C:31.50,D:24.95,E:11.69,F:14.95,G:19.99,H:39.99,I:24.99 };
-      const valid = { trouser:["A","B","C"], shirt:["D","E","F"], jacket:["G","H","I"] };
-      if (!valid.trouser.includes(trouser) || !valid.shirt.includes(shirt) || !valid.jacket.includes(jacket)) return false;
-      return prices[trouser] + prices[shirt] + prices[jacket] <= 60;
+    check: (a) => {
+      const trouserPrices = [15.40, 17.45, 31.50];
+      const shirtPrices   = [24.95, 11.69, 14.95];
+      const jacketPrices  = [19.99, 39.99, 24.99];
+    
+      const parse = v => Math.round(parseFloat(v?.trim()) * 100) / 100;
+    
+      const p1 = parse(a.input);
+      const p2 = parse(a.input2);
+      const p3 = parse(a.input3);
+    
+      if (!trouserPrices.includes(p1)) return false;
+      if (!shirtPrices.includes(p2))   return false;
+      if (!jacketPrices.includes(p3))  return false;
+    
+      return p1 + p2 + p3 <= 60;
     },
     displayAnswer: "Any valid combination ≤ £60, e.g. A + E + G = £47.08",
     explanation: "Cheapest possible: A(£15.40) + E(£11.69) + G(£19.99) = £47.08. Multiple valid answers.",
@@ -277,22 +287,32 @@ export const questions = [
   {
     id: "B9a", sec: "B", marks: 3, type: "table",
     // type "table": render 7-row table Mon–Sun; user ticks correct rows
-    preText: "Stockroom temperature must be between 10°C and 15°C.\n\nTemperatures recorded:\nMonday 12.5°C | Tuesday 13.6°C | Wednesday 14.8°C | Thursday 15.3°C | Friday 14.4°C | Saturday 10.5°C | Sunday 9°C",
-    text: "Complete the table starting with Monday. Tick each day to show if the temperature was between 10°C and 15°C.",
+    preText: "The man gets the job.\n\nAll the new staff have to attend a training day.\n\nThe trainer tells the new staff the stockroom temperature must be kept between 10°C and 15°C every day. \n\nThe trainer noted the temperature in the stockroom each day last week.",
+    image:"B-Q9a",imgSrc: "images/B-Q9a.png",
+    text: "Complete the table starting with Monday.\nTick each day to show if the temperature was between 10°C and 15°C.",
     hint: "Remember the range is 10°C ≤ temp ≤ 15°C.",
     tableData: {
-      headers: ["Day", "Temperature °C", "Between 10°C and 15°C ✓"],
+      headers: ["Day", "Temperature °C", "Between 10°C and 15°C -> yes or no"],
       rows: [
-        { label: "Monday",    value: "12.5°C", tick: true  },
-        { label: "Tuesday",   value: "13.6°C", tick: true  },
-        { label: "Wednesday", value: "14.8°C", tick: false },
-        { label: "Thursday",  value: "15.3°C", tick: false },
-        { label: "Friday",    value: "14.4°C", tick: true  },
-        { label: "Saturday",  value: "10.5°C", tick: true  },
-        { label: "Sunday",    value: "9°C",    tick: false },
+        { label: "Monday",    given: false, valueEditable: true },
+        { label: "Tuesday",   given: false, valueEditable: true },
+        { label: "Wednesday", given: false, valueEditable: true },
+        { label: "Thursday",  given: false, valueEditable: true },
+        { label: "Friday",    given: false, valueEditable: true },
+        { label: "Saturday",  given: false, valueEditable: true },
+        { label: "Sunday",    given: false, valueEditable: true },
       ],
     },
-    answer: { ticked: ["Monday","Tuesday","Friday","Saturday"] },
+    answer: {
+      "Monday_temp":    "12.5",  "Monday_yn":    "no",
+      "Tuesday_temp":   "13.6",  "Tuesday_yn":   "yes",
+      "Wednesday_temp": "14.8",  "Wednesday_yn": "yes",
+      "Thursday_temp":  "15.3",  "Thursday_yn":  "no",
+      "Friday_temp":    "14.4",  "Friday_yn":    "yes",
+      "Saturday_temp":  "10.5",  "Saturday_yn":  "yes",
+      "Sunday_temp":    "9",     "Sunday_yn":    "no",
+    },
+   
     displayAnswer: "Ticked: Monday, Tuesday, Friday, Saturday",
     explanation: "14.8°C (Wed) and 15.3°C (Thu) exceed 15°C. 9°C (Sun) is below 10°C. All others are within range.",
   },
@@ -321,6 +341,7 @@ export const questions = [
   {
     id: "B10b", sec: "B", marks: 1, type: "multi",
     image: "C10b – Boxes A(22kg) B(32kg) C(23kg) D(790g)", imgSrc: "images/B-Q10b.png",
+    preText: "Maximum weight for lifting boxes for women is up to 16 kg.\nMaximum weight for lifting boxes for men is up to 25 kg.",
     text: "Which of these boxes is a man allowed to lift? Tick the boxes.\n\nA: 22 kg   B: 32 kg   C: 23 kg   D: 790 g",
     hint: "Men can lift up to 25 kg.",
     options: ["A (22 kg)", "B (32 kg)", "C (23 kg)", "D (790 g)"],
