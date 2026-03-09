@@ -1,7 +1,6 @@
 import { C } from "../config/constants";
 import { ParcelTable } from "./ParcelTable";
 
-
 export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
   const upd = patch => onUpdate(patch);
 
