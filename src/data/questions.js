@@ -10,343 +10,240 @@ export const questions = [
   // ── Non-calculator ──────────────────────────────────────────────────────────
 
   {
-    id: "A1", sec: "A", marks: 1, type: "number",
-    text: "Work out 48 × 19 =",
-    hint: "Break it down: 48 × 20 = 960, then subtract 48.",
-    answer: 912, displayAnswer: "912",
-    explanation: "48 × 19 = 48 × 20 − 48 = 960 − 48 = 912",
+    id: "A1",
+    sec: "A",
+    marks: 1,
+    type: "choice",
+    text: "Lucy wants to wake up before seven o'clock. What time will Lucy set her alarm clock to?",
+    imgSrc: "QB1.png",
+    options: ["6:45", "1:00", "5:30", "7:00"],
+    answer: "6:45",
+    displayAnswer: "6:45",
+    hint: "Look for a time that is before 7 o'clock.",
+    explanation: "Any time before 7:00 is correct. The first clock shows 6:45, which is before 7 o'clock."
   },
 
   {
-    id: "A2", sec: "A", marks: 1, type: "order",
-    // type "order": render 4 input boxes; accept any correct ordering string \n\n12\u00a0\u00a0\u00a0\u00a024\u00a0\u00a0\u00a0\u00a036\n
-    text: "Write these amounts in order starting with the largest amount.\n\n330 ml\u00a0\u00a0\u00a0\u00a01 litre\u00a0\u00a0\u00a0\u00a0500 ml\u00a0\u00a0\u00a0\u00a0250 ml",
-    hint: "Convert 1 litre to ml first.",
-    answer: ["1 litre", "500 ml", "330 ml", "250 ml"],
-    displayAnswer: "1 litre, 500 ml, 330 ml, 250 ml",
-    explanation: "1 litre = 1000 ml. Order: 1000 ml, 500 ml, 330 ml, 250 ml.",
+    id: "A2",
+    sec: "A",
+    marks: 1,
+    type: "text",
+    text: "Lucy looks at the waiting times for buses. Lucy takes a bus to the station. She takes the bus with the least waiting time. Which bus does Lucy take?",
+    answer: "Bus 8",
+    displayAnswer: "Bus 8",
+    hint: "Look at the buses going to the station. Find the one with the smallest waiting time.",
+    explanation: "Buses to station: Bus 4 (20 min), Bus 8 (9 min), Bus 13 (14 min). Bus 8 has the least waiting time of 9 minutes."
   },
 
   {
-    id: "A3", sec: "A", marks: 1, type: "choice",
-    image: "A3 – Weighing scales A B C D", imgSrc: "images/Q3.png",
-    text: "Which one of the following is the best to measure out 300 g of flour?\n\nTick one.",
-    hint: "You need scales that measure in grams accurately.",
-    options: ["A", "B", "C", "D"],
-    answer: "B", displayAnswer: "B",
-    explanation: "B is a kitchen/cooking scale — best for accurately measuring 300 g of flour.",
+    id: "A3",
+    sec: "A",
+    marks: 1,
+    type: "number",
+    text: "Lucy compares the costs of rail and bus tickets. Lucy pays £11 for an adult week bus ticket. How much less does Lucy pay for an adult week bus ticket than an adult week rail ticket?",
+    imgSrc: "QB3.png",
+    answer: 16,
+    displayAnswer: "£16",
+    hint: "Find the cost of an adult week rail ticket on the chart, then subtract £11.",
+    explanation: "Adult week rail ticket costs £27. £27 - £11 = £16 less for the bus ticket."
+  },
+
+  // ═══════════════════════════════════════════════════════════════════
+  // SECTION B – Calculator (15 questions, skip Q10)
+  // ═══════════════════════════════════════════════════════════════════
+
+  {
+    id: "B1",
+    sec: "B",
+    marks: 1,
+    type: "choice",
+    text: "Lucy wants to wake up before seven o'clock. What time will Lucy set her alarm clock to? Tick the correct answer.",
+    imgSrc: "QB1.png",
+    options: ["6:45", "1:00", "5:30", "7:00"],
+    answer: "6:45",
+    displayAnswer: "6:45",
+    hint: "Look for a time that is before 7 o'clock.",
+    explanation: "Any time before 7:00 is correct. 6:45 is before 7 o'clock."
   },
 
   {
-    id: "A4", sec: "A", marks: 1, type: "twonumber",
-    text: "896 ÷ 5 =",
-    hint: "How many times does 5 go into 896? What is left over?",
-    labels: ["answer", "remainder"],
-    answer: [179, 1], displayAnswer: "179 remainder 1",
-    explanation: "896 ÷ 5 = 179 remainder 1  (5 × 179 = 895; 896 − 895 = 1)",
+    id: "B2",
+    sec: "B",
+    marks: 1,
+    type: "text",
+    text: "Lucy looks at the waiting times for buses. Lucy takes a bus to the station. She takes the bus with the least waiting time. Which bus does Lucy take?",
+    answer: "Bus 8",
+    displayAnswer: "Bus 8",
+    hint: "Find the bus going to the station with the shortest waiting time.",
+    explanation: "Buses to station: Bus 4 (20 min), Bus 8 (9 min), Bus 13 (14 min). Bus 8 has the least waiting time."
   },
 
   {
-    id: "A5", sec: "A", marks: 1, type: "number",
-    text: "What is the next number in this sequence?\n\n3.4\u00a0\u00a0\u00a0\u00a05.1\u00a0\u00a0\u00a0\u00a0 6.8\u00a0\u00a0\u00a0\u00a0     ___",
-    hint: "What is added each time?",
-    answer: 8.5, displayAnswer: "8.5",
-    explanation: "+1.7 each time: 3.4 → 5.1 → 6.8 → 8.5",
+    id: "B3",
+    sec: "B",
+    marks: 1,
+    type: "number",
+    text: "Lucy compares the costs of rail and bus tickets. Lucy pays £11 for an adult week bus ticket. How much less does Lucy pay for an adult week bus ticket than an adult week rail ticket?",
+    imgSrc: "QB3.png",
+    answer: 16,
+    displayAnswer: "£16",
+    hint: "Read the chart for adult week rail ticket cost. Subtract the bus ticket cost.",
+    explanation: "Adult week rail ticket = £27. £27 - £11 = £16"
   },
 
   {
-    id: "A6", sec: "A", marks: 1, type: "number",
-    text: "What is £567.27 rounded to the nearest pound?",
-    hint: "Look at the pence: 27p is less than 50p, so round down.",
-    answer: 567, displayAnswer: "£567",
-    explanation: "27p < 50p, so round down: £567.",
+    id: "B4",
+    sec: "B",
+    marks: 1,
+    type: "choice",
+    text: "Lucy pays for her travel. She works out how much money is left over. She does this calculation: 154 − 29 ___ 125. What is the missing symbol?",
+    options: ["+", "=", "×", "÷"],
+    answer: "=",
+    displayAnswer: "=",
+    hint: "Work out 154 − 29 and see what it equals.",
+    explanation: "154 − 29 = 125, so the missing symbol is = (equals)."
   },
 
   {
-    id: "A7", sec: "A", marks: 1, type: "text",
-    image: "A7 – Circle divided into 5 equal segments, 1 shaded", imgSrc: "images/Q7.png",
-    text: "What fraction of this shape is shaded?",
-    hint: "Count the total sections and the shaded sections.",
-    answer: "1/5", displayAnswer: "1/5",
-    check: v => v.trim().replace(/\s/g, "") === "1/5",
-    explanation: "The circle has 5 equal parts; 1 is shaded → 1/5.",
+    id: "B5",
+    sec: "B",
+    marks: 1,
+    type: "number",
+    text: "Lucy sells lamps in the shape of a pyramid. How many corners does the base of the pyramid have?",
+    imgSrc: "QB5.png",
+    answer: 4,
+    displayAnswer: "4",
+    hint: "Look at the base of the pyramid. Count the corners.",
+    explanation: "A pyramid has a square base. A square has 4 corners."
   },
 
   {
-    id: "A8", sec: "A", marks: 1, type: "choice",
-    pretext:"A woman sees three job advertisements.\n\nShe wants to apply for the job nearest to where she lives.",
-    customContent: "jobs",
-    text: "Which job will she apply for?",
-    hint: "Find the smallest distance.",
-    options: ["Job A", "Job B", "Job C"],
-    answer: "Job C", displayAnswer: "Job C",
-    explanation: "148 km < 152 km < 154 km. Nearest = Job C.",
+    id: "B6",
+    sec: "B",
+    marks: 3,
+    type: "number",
+    text: "Lucy puts a lamp into a box. The arrow shows how tall the lamp is. The box is 6 cm taller than the lamp. How tall is the box to the nearest division? Use the correct unit.",
+    imgSrc: "QB6.png",
+    answer: 95,
+    displayAnswer: "95 cm",
+    hint: "Read where the arrow points on the scale. Add 6 cm to that measurement.",
+    explanation: "The lamp measures 89 cm. 89 + 6 = 95 cm."
   },
 
   {
-    id: "A9", sec: "A", marks: 1, type: "twotext",
-    // type "multi": two free-text boxes (or a multi-select from month names)
-    image: "A9 – Bar chart: factory workers Jan–Jun", imgSrc: "images/Q9.png",
-    text: "The bar chart shows the number of workers employed in a factory from January to June.\n\nIn which two months did the factory employ the same number of workers?",
-    hint: "Look for two bars that reach the same height.",
-    answer: ["January", "April"],
-    displayAnswer: "January and April",
-    explanation: "January and April both show approximately 430 workers — the same bar height.",
+    id: "B7",
+    sec: "B",
+    marks: 1,
+    type: "choice",
+    text: "Lucy sells a table. The top of the table is a hexagon. Which shape is a hexagon? Tick the correct answer.",
+    imgSrc: "QB7.png",
+    options: ["Circle", "Rectangle", "Hexagon", "Diamond", "Trapezium", "Pentagon"],
+    answer: "Hexagon",
+    displayAnswer: "Hexagon",
+    hint: "A hexagon has 6 sides.",
+    explanation: "A hexagon is the shape with 6 equal sides. It's the third shape shown."
   },
 
   {
-    id: "A10", sec: "A", marks: 1, type: "table",
-    // type "table": render partial table; user fills in the two missing cells
-    image: "A10 – Tally / raw data", imgSrc: "images/Q10.png",
-    preText: "At a workplace induction people were asked how they travelled to work that morning.\n\nThese are the results:",
-    text: "Complete the frequency table.\n\nbus = 6, car = 5, cycle = 5 (given). Fill in walk and train.",
-    hint: "Count the tally marks for walk and train in the raw data.",
-    tableData: {
-      headers: ["Travel to work", "Frequency"],
-      rows: [
-        { label: "bus",   value: 6,    given: true  },
-        { label: "car",   value: 5,    given: true  },
-        { label: "cycle", value: 5,    given: true  },
-        { label: "walk",  value: null, given: false },
-        { label: "train", value: null, given: false },
-      ],
-    },
-    answer: { walk: 6, train: 3 },
-    displayAnswer: "walk = 6, train = 3",
-    explanation: "Counting from the raw data: walk appears 6 times, train appears 3 times. Total = 6+5+5+6+3 = 25 ✓",
-  },
-
-  // ── Calculator paper (sec: "B") ─────────────────────────────────────────────
-  {
-    id: "B1", sec: "B", marks: 1, type: "number",
-    text: "242 + 361 + 295 =",
-    hint: "Add the hundreds, tens and units separately if needed.",
-    answer: 898, displayAnswer: "898",
-    explanation: "242 + 361 = 603; 603 + 295 = 898",
+    id: "B8",
+    sec: "B",
+    marks: 2,
+    type: "yesno",
+    text: "Lucy puts one box on a trolley. The box on the trolley has a weight of 27 kg. The most weight the trolley can take is 50 kg. She has another box with a weight of 19 kg. Can the trolley take the weight of both boxes? Show why you think this.",
+    answer: "Yes",
+    displayAnswer: "Yes",
+    hint: "Add the two box weights together. Compare to the maximum weight of 50 kg.",
+    explanation: "27 + 19 = 46 kg. 46 kg is less than 50 kg, so yes, the trolley can take both boxes."
   },
 
   {
-    id: "B2", sec: "B", marks: 1, type: "multi",
-    image: "B2 – Letters A C E G", imgSrc: "images/B-Q2.png",
-    text: "Tick all the letters that have a line of symmetry.",
-    hint: "Fold each letter in half — does one side mirror the other?",
-    options: ["A", "C", "E", "G"],
-    answer: ["A", "C","E"],   // A C = vertical symmetry; E = horizontal symmetry;  G do not
-    displayAnswer: "A, C and E",
-    explanation: "A and C have a vertical line of symmetry; E has a horizontal line of symmetry.",
+    id: "B9a",
+    sec: "B",
+    marks: 1,
+    type: "number",
+    text: "Round 27 to the nearest 10.",
+    answer: 30,
+    displayAnswer: "30",
+    hint: "Is 27 closer to 20 or 30?",
+    explanation: "27 is closer to 30 than to 20, so rounded to nearest 10 it is 30."
   },
 
   {
-    id: "B3", sec: "B", marks: 1, type: "number",
-    text: "What is the next number in this sequence?\n\n39\u00a0\u00a0\u00a0\u00a0     52 \u00a0\u00a0\u00a0\u00a0      65 \u00a0\u00a0\u00a0\u00a0      78 \u00a0\u00a0\u00a0\u00a0      ___",
-    hint: "What is added each time?",
-    answer: 91, displayAnswer: "91",
-    explanation: "+13 each time: 78 + 13 = 91",
-  },
-
-  // Q4 is split into four sub-questions
-  {
-    id: "B4a", sec: "B", marks: 2, type: "number",
-   
-    preText: "A man sees a job advert in a newspaper.\n\nHe decides to apply for the job.\n\nHe wants to work out how many hours each week he will have to work.",
-    customContent:"jobAdvert",
-    text: "What number of hours will he need to work each week?",
-    hint: "How many hours is 6am to 2pm? Multiply by the number of days.",
-    answer: 40, displayAnswer: "40 hours",
-    suffix: "hours",
-    explanation: "6am to 2pm = 8 hours per day × 5 days = 40 hours per week.",
+    id: "B9b",
+    sec: "B",
+    marks: 1,
+    type: "number",
+    text: "Use the rounded number to check your answer to question 8.",
+    answer: 49,
+    displayAnswer: "49 kg or approximately 50 kg",
+    hint: "Use 30 instead of 27. Add it to 19.",
+    explanation: "30 + 19 = 49 kg. This is close to 50 kg, which confirms the trolley can take both boxes."
   },
 
   {
-    id: "B4b", sec: "B", marks: 3, type: "number",
-    preText: " The man uses this table to find out how much he should be paid each week before any deductions are made.\n\nThe man is 17 years old.",
-    image: "B4 – Job advert & wage table", imgSrc: "images/B-Q4.png",
-    text: "What will the man be paid each week? Give units with your answer.",
-    hint: "Find the correct wage band for age 17, then multiply by hours.",
-    answer: 211.20, displayAnswer: "£211.20",
-    check: v => Math.abs(parseFloat(v.replace(/^£/, "")) - 211.20) < 0.01,
-    explanation: "Age 17 = Under 18 rate: £5.28 × 40 hours = £211.20",
+    id: "B11",
+    sec: "B",
+    marks: 3,
+    type: "number",
+    text: "A customer pays Lucy for 6 coat hooks at 12p each. How much does the customer pay in total? Use the correct symbol for money.",
+    answer: "0.72",
+    displayAnswer: "£0.72 or 72p",
+    hint: "Multiply 6 by 12p.",
+    explanation: "6 × 12p = 72p = £0.72"
   },
 
   {
-    id: "B4c", sec: "B", marks: 1, type: "text",
-    text: "Give a reason for the National Minimum Wage you used.",
-    hint: "State the man's age and the relevant band.",
-    answer: "under18",
-    check: v => v.toLowerCase().includes("17") || v.toLowerCase().includes("under 18"),
-    displayAnswer: "He is 17 years old, which is under 18.",
-    explanation: "The man is 17 so the 'Under 18 years' rate of £5.28 per hour applies.",
+    id: "B12",
+    sec: "B",
+    marks: 1,
+    type: "number",
+    text: "Lucy has information about cupboards for sale. Lucy looks for a grey cupboard with more than 3 drawers. How much will she spend?",
+    imgSrc: "QB12.png",
+    answer: 112,
+    displayAnswer: "£112",
+    hint: "Find the grey cupboards. Look for the one with more than 3 drawers.",
+    explanation: "The grey cupboard with 4 drawers costs £112."
   },
 
   {
-    id: "B4d", sec: "B", marks: 2, type: "number",
-    text: "The man wants to work out approximately how much the pay would be for one month.\nHe uses four weeks for one month.\n\nWhat would the approximate pay be?\n\nShow your working.",
-    hint: "Round the weekly pay first, then multiply by 4.",
-    answer: 844.80,   // exact; accept rounded values
-    check: v => {
-      const n = parseFloat(v.replace(/^£/, ""));
-      // Accept exact (£211.20×4=£844.80) or rounded approximations
-      return n >= 800 && n <= 900;
-    },
-    displayAnswer: "≈ £844.80",
-    explanation: "£211.20 × 4 = £844.80. A reasonable approximation: £210 × 4 = £840.",
+    id: "B13",
+    sec: "B",
+    marks: 1,
+    type: "choice",
+    text: "Lucy looks at a diagram about home deliveries. The first morning home delivery is nearest to the shop. Which morning home delivery is first? Tick the answer on the diagram.",
+    imgSrc: "QB13.png",
+    options: ["A", "C", "B"],
+    answer: "C",
+    displayAnswer: "C",
+    hint: "Find which morning delivery (empty house symbol) is closest to the shop (filled circle).",
+    explanation: "C is the morning home delivery that is nearest to the shop."
   },
 
   {
-    id: "B5", sec: "B", marks: 3, type: "threetext",
-    // type "calendar": display an August calendar; user marks two dates with notes
-    image: "B5 – August calendar", imgSrc: "images/B-Q52.png",
-    preText: "The man applies for the job.\n He checks the advert for the closing date for the job application and when the interviews will be held.\n\nHe wants to make a note of this information.",
-    customContent:"deadline",
-    text: "Fill in the inforamtion for his notes.",
-    hint: "Mark both the closing date (12 Aug) and the interview date/times (14 Aug, 10am–3pm).",
-    labels: ["What is the closing date for the application?", "What day of the week are interviews held?", "What time do interviews start"],
-    answer: ["12 August","Friday","10am"] ,
-    displayAnswer: "closing date noted: 12 Aug,  day of interview:Friday; interview 10 am noted",
-    explanation: "closing date: 12 Aug:  noted; day of interview Friday; interview 10 am noted",
+    id: "B14",
+    sec: "B",
+    marks: 1,
+    type: "number",
+    text: "Lucy counts the furniture deliveries she makes. Lucy needs a bar chart to show the information. Show the number of deliveries of tables on the chart.",
+    imgSrc: "QB14a.png",
+    answer: 21,
+    displayAnswer: "21",
+    hint: "Find the number of table deliveries from the data table and draw the bar to that height.",
+    explanation: "The table shows 21 deliveries of tables. Draw a bar up to 21 on the chart."
   },
 
   {
-    id: "B6a", sec: "B", marks: 3, type: "threetext",
-    // type "shopping": display image grid of items; user picks one from each category
-    image: "B6 – Clothes grid A–I", imgSrc: "images/B-Q6.png",
-    preText: "The man gets an interview for the job.\n He wants to look smart for his interview.\n\nHe has £60 to spend on clothes.\n He needs to buy a pair of trousers,a shirt and a jacket.\n\nHe looks online and chooses from these items. ",
-    text: "Write the price of the three items he decides to buy.",
-    labels: ["Item 1:", "Item 2:", "Item 3:",],
-    hint: "Choose one from each group. The total must be £60 or less.",
-    // Any valid combination ≤ £60 is accepted. Cheapest = A+E+G = £47.08
-    answer: null,   // open — validate in check()
-    check: (a) => {
-      const trouserPrices = [15.40, 17.45, 31.50];
-      const shirtPrices   = [24.95, 11.69, 14.95];
-      const jacketPrices  = [19.99, 39.99, 24.99];
-    
-      const parse = v => Math.round(parseFloat(v?.trim()) * 100) / 100;
-    
-      const p1 = parse(a.input);
-      const p2 = parse(a.input2);
-      const p3 = parse(a.input3);
-    
-      if (!trouserPrices.includes(p1)) return false;
-      if (!shirtPrices.includes(p2))   return false;
-      if (!jacketPrices.includes(p3))  return false;
-    
-      return p1 + p2 + p3 <= 60;
-    },
-    displayAnswer: "Any valid combination ≤ £60, e.g. A + E + G = £47.08",
-    explanation: "Cheapest possible: A(£15.40) + E(£11.69) + G(£19.99) = £47.08. Multiple valid answers.",
-  },
+    id: "B15",
+    sec: "B",
+    marks: 1,
+    type: "choice",
+    text: "Lucy buys hot food for lunch. She wants to pay less than £5. Which food will Lucy buy? Tick the correct answer.",
+    options: ["Sandwich", "Pie", "Curry", "Salad", "Pizza", "Pasta"],
+    answer: "Pie",
+    displayAnswer: "Pie",
+    hint: "Find the hot foods that cost less than £5.",
+    explanation: "The hot foods are: Pie (£4) ✓, Curry (£6) ✗, Pizza (£8) ✗. Only Pie is hot AND less than £5."
+  }
+];
 
-  {
-    id: "B6b", sec: "B", marks: 1, type: "number",
-    text: "He wants to spend the money he has left on a haircut. \n\nWhat will he have left to spend on a haircut?\n\nShow your working.",
-    hint: "Subtract your total from £60.",
-    answer: null,  // depends on C6a; validate as 60 minus their total
-    check: (leftover, total) => Math.abs(leftover + total - 60) < 0.01,
-    displayAnswer: "£60 − their total, e.g. £60 − £47.08 = £12.92",
-    explanation: "£60 minus the amount paid in C6a.",
-  },
-
-  {
-    id: "B6c", sec: "B", marks: 1, type: "text",
-    text: "Use approximation to check your answer.\n\nWrite your check here.",
-    hint: "Round each item price to the nearest pound, add them, subtract from £60.",
-    answer: null,  // free text — any reasonable approximation
-    displayAnswer: "e.g. £15 + £12 + £20 = £47 → £60 − £47 = £13 ✓",
-    explanation: "Award the mark for a valid approximate check consistent with their answer.",
-  },
-
-  {
-    id: "B7a", sec: "B", marks: 1, type: "choice",
-    image: "B7 – Map with compass N arrow; home is east, supermarket is west", imgSrc: "images/B-Q7.png",
-    text: "In which direction is the supermarket from the man's home?",
-    hint: "N is shown on the map. The supermarket is to the left of home.",
-    options: ["North", "South", "East", "West"],
-    answer: "West", displayAnswer: "West",
-    explanation: "The arrow on the map points left (west) from the man's home to the supermarket.",
-  },
-
-  {
-    id: "B7b", sec: "B", marks: 1, type: "choice",
-    text: "The website shows four routes. He wants the shortest.\n\nRoute A: 1.5 miles \nRoute B: 1.3 miles   \nRoute B: 1.7 miles  \nRoute D: 1.6 miles\n\nTick the route the man will take.",
-    hint: "Find the smallest distance.",
-    options: ["Route A", "Route B", "Route C", "Route D"],
-    answer: "Route B", displayAnswer: "Route B",
-    explanation: "1.3 miles is the shortest route.",
-  },
-
-  {
-    id: "B8", sec: "B", marks: 2, type: "yesno",
-    image: "B8 – Phone showing 13:50", imgSrc: "images/B-Q8.png",
-    text: "The man's interview is at 2:15 pm.\n\nWhen he arrives at the supermarket, his phone shows 13:50.\n\nIs he on time for his interview?\n\nGive a reason for your answer. Use the times to help you explain.",
-    hint: "Convert 2:15 pm to 24-hour time, then compare.",
-    answer: "Yes", displayAnswer: "Yes",
-    explanation: "2:15 pm = 14:15. His phone shows 13:50, which is 25 minutes before 14:15. He arrives early.",
-  },
-
-  {
-    id: "B9a", sec: "B", marks: 3, type: "table",
-    // type "table": render 7-row table Mon–Sun; user ticks correct rows
-    preText: "The man gets the job.\n\nAll the new staff have to attend a training day.\n\nThe trainer tells the new staff the stockroom temperature must be kept between 10°C and 15°C every day. \n\nThe trainer noted the temperature in the stockroom each day last week.",
-    image:"B-Q9a",imgSrc: "images/B-Q9a.png",
-    text: "Complete the table starting with Monday.\nTick each day to show if the temperature was between 10°C and 15°C.",
-    hint: "Remember the range is 10°C ≤ temp ≤ 15°C.",
-    tableData: {
-      headers: ["Day", "Temperature °C", "Between 10°C and 15°C -> yes or no"],
-      rows: [
-        { label: "Monday",    given: false, valueEditable: true },
-        { label: "Tuesday",   given: false, valueEditable: true },
-        { label: "Wednesday", given: false, valueEditable: true },
-        { label: "Thursday",  given: false, valueEditable: true },
-        { label: "Friday",    given: false, valueEditable: true },
-        { label: "Saturday",  given: false, valueEditable: true },
-        { label: "Sunday",    given: false, valueEditable: true },
-      ],
-    },
-    answer: {
-      "Monday_temp":    "12.5",  "Monday_yn":    "no",
-      "Tuesday_temp":   "13.6",  "Tuesday_yn":   "yes",
-      "Wednesday_temp": "14.8",  "Wednesday_yn": "yes",
-      "Thursday_temp":  "15.3",  "Thursday_yn":  "no",
-      "Friday_temp":    "14.4",  "Friday_yn":    "yes",
-      "Saturday_temp":  "10.5",  "Saturday_yn":  "yes",
-      "Sunday_temp":    "9",     "Sunday_yn":    "no",
-    },
-   
-    displayAnswer: "Ticked: Monday, Tuesday, Friday, Saturday",
-    explanation: "14.8°C (Wed) and 15.3°C (Thu) exceed 15°C. 9°C (Sun) is below 10°C. All others are within range.",
-  },
-
-  {
-    id: "B9b", sec: "B", marks: 2, type: "yesno",
-    image: "C9b – Thermometer showing ~15°C", imgSrc: "images/B-Q9.png",
-    text: "The temperature in the supermarket should be about 18°C.\n\nThis thermometer shows the temperature in the supermarket today.\n\nIs the temperature about right?\n\nGive a reason for your answer.",
-    hint: "Read the thermometer value and compare it to 18°C.",
-    answer: "No", displayAnswer: "No",
-    explanation: "The thermometer reads approximately 15°C, which is not about 18°C. The temperature is too low.",
-  },
-
-  {
-    id: "B10a", sec: "B", marks: 1, type: "multi",
-    image: "C10 – Boxes A(18kg) B(20kg) C(13kg) D(900g)", imgSrc: "images/B-Q10.png",
-    preText: "Maximum weight for lifting boxes for women is up to 16 kg.\nMaximum weight for lifting boxes for men is up to 25 kg.",
-    text: "Which of these boxes is a woman allowed to lift? Tick the boxes.\n\nA: 18 kg   B: 20 kg   C: 13 kg   D: 900 g",
-    hint: "Women can lift up to 16 kg. Convert 900 g to kg.",
-    options: ["A (18 kg)", "B (20 kg)", "C (13 kg)", "D (900 g)"],
-    answer: ["C (13 kg)", "D (900 g)"],
-    displayAnswer: "C and D",
-    explanation: "13 kg ≤ 16 kg ✓ and 0.9 kg ≤ 16 kg ✓. 18 kg and 20 kg both exceed 16 kg.",
-  },
-
-  {
-    id: "B10b", sec: "B", marks: 1, type: "multi",
-    image: "C10b – Boxes A(22kg) B(32kg) C(23kg) D(790g)", imgSrc: "images/B-Q10b.png",
-    preText: "Maximum weight for lifting boxes for women is up to 16 kg.\nMaximum weight for lifting boxes for men is up to 25 kg.",
-    text: "Which of these boxes is a man allowed to lift? Tick the boxes.\n\nA: 22 kg   B: 32 kg   C: 23 kg   D: 790 g",
-    hint: "Men can lift up to 25 kg.",
-    options: ["A (22 kg)", "B (32 kg)", "C (23 kg)", "D (790 g)"],
-    answer: ["A (22 kg)", "C (23 kg)", "D (790 g)"],
-    displayAnswer: "A, C and D",
-    explanation: "22 kg, 23 kg and 0.79 kg are all ≤ 25 kg ✓. 32 kg exceeds the 25 kg limit.",
-  },
 ];

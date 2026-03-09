@@ -16,8 +16,8 @@ export const C = {
   err: "#dc2626",
   neu: "#6b7280",
   bg:  "#f8fafc",
-  card:"#fff",
+  card:"#add8e6 ",
   bdr: "#e2e8f0",
-  a:   "#0369a1",
+  a:   "#00008b",
   b:   "#7c3aed",
 }
