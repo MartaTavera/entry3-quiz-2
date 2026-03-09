@@ -32,7 +32,7 @@ export function EmailPanel({ score, total, answers, questions }) {
     } catch (e) { setErr("Network error. Please try again."); }
     
     setSending(false);
-
+  }
   return (
     <div style={{ background: "#f8fafc", borderRadius: 10, padding: 18, marginBottom: 18, border: `1px solid ${C.bdr}` }}>
       <h3 style={{ margin: "0 0 8px", fontSize: 16 }}>📧 Send your results</h3>
